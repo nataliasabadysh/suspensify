@@ -3,6 +3,7 @@ import React, {lazy, Suspense } from 'react';
 
 // Components 
 const PokemonDetailAsync = lazy(()=> import('./components/PokemonDetail'/* webpackChunkName: "poke-page" */ ))
+const ErrorBoundary = lazy(()=> import('./components/ErrorBoundary'/* webpackChunkName: "error-page" */ ))
 
 // const PokemonDetailAsync = lazy(()=> Promise.reject())
 
@@ -12,14 +13,9 @@ const PokemonDetailAsync = lazy(()=> import('./components/PokemonDetail'/* webpa
 //     }), 1000) )
 //   )
 
-
-const ErrorBoundary = lazy(()=> import('./components/ErrorBoundary'/* webpackChunkName: "error-page" */ ))
-
 function App() {
   return (
     <>
-     <p> App Wello world</p>
-
         <Suspense fallback={'Loading... '}>
 
           <ErrorBoundary>
