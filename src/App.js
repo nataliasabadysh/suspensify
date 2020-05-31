@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Core
+import React, {lazy, Suspense } from 'react';
+
+// Components 
+const PokemonDetailAsync = lazy(()=> import('./components/PokemonDetail'/* webpackChunkName: "poke-page" */ ))
+
+// const PokemonDetailAsync = lazy(()=> Promise.reject())
+
+// const PokemonDetailAsync = lazy(
+//     () => new Promise(resolve => setTimeout(()=> resolve({ default: ()=> 
+//       <div>Fake Pokemon </div>
+//     }), 1000) )
+//   )
+
+
+const ErrorBoundary = lazy(()=> import('./components/ErrorBoundary'/* webpackChunkName: "error-page" */ ))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <p> App Wello world</p>
+
+        <Suspense fallback={'Loading... '}>
+
+          <ErrorBoundary>
+            <h1> hey there </h1>
+            <PokemonDetailAsync title="test title" />
+          </ErrorBoundary>
+
+        </Suspense>
+    </>
   );
 }
 
